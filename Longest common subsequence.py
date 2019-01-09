@@ -22,7 +22,40 @@ def LCS(a,b):
             ##if last letters are different
             else:
                 arr[i][j]= max(arr[i-1][j],arr[i][j-1])
-            
+    print(arr)
     return arr[m][n]
 
+
 LCS("AGGTAB","GXTXAYB")
+#Time complexity
+#O(mn)
+
+# A Naive recursive Python implementation of LCS problem 
+  
+def lcs(X, Y, m, n): 
+  
+    if m == 0 or n == 0: 
+       return 0; 
+    elif X[m-1] == Y[n-1]: 
+       return 1 + lcs(X, Y, m-1, n-1); 
+    else: 
+       return max(lcs(X, Y, m, n-1), lcs(X, Y, m-1, n)); 
+  
+  
+# Driver program to test the above function 
+X = "AGGTAB"
+Y = "GXTXAYB"
+print "Length of LCS is ", lcs(X , Y, len(X), len(Y)) 
+
+###Time complexity = O(2^n)
+#T(1) = O(1)
+#and
+#T(N) = O(1) + 2*T(N-1) when N>1
+#If you repeatedly expand the last term, you get:
+#
+#T(N) = 3*O(1) + 4*T(N-2)
+#T(N) = 7*O(1) + 8*T(N-3)
+#...
+#T(N) = (2^(N-1)-1)*O(1) + (2^(N-1))*T(1)
+#T(N) = (2^N - 1)*O(1)
+#T(N) = O(2^N)
